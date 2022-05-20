@@ -35,14 +35,12 @@
 						<div class="topbar-menu left-menu">
 							<ul>
 								<li class="menu-item" >
-									<a title="Hotline: (+123) 456 789" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
+									<a title="Hotline: (+123) 456 789" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+20) 1148630595</a>
 								</li>
 							</ul>
 						</div>
 						<div class="topbar-menu right-menu">
 							<ul>
-								<li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
-								<li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
 								<li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="English" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu lang" >
@@ -66,6 +64,44 @@
 										</li>
 									</ul>
 								</li>
+								@if(Route::has("login"))
+									@auth
+										@if(Auth::user()->user_type === 'admin')
+											<li class="menu-item menu-item-has-children parent" >
+												<a title="My Account" href="#">My Account {{Auth::user()->name}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<ul class="submenu curency" >
+													<li class="menu-item" >
+														<a title="Dashboard" href="{{ route('admin.dashboard')}}">Dashboard</a>
+													</li>
+													<form id="logout-form" action="{{ route('logout') }}" method="post">
+														@csrf
+													</form>
+													<li class="menu-item" >
+														<a title="Logout" href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+													</li>
+												</ul>
+											</li>
+										@else
+										<li class="menu-item menu-item-has-children parent" >
+											<a title="My Account" href="#">My Account {{Auth::user()->name}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+											<ul class="submenu curency" >
+												<li class="menu-item" >
+													<a title="Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+												</li>
+												<form id="logout-form" action="{{ route('logout') }}" method="post">
+													@csrf
+												</form>
+												<li class="menu-item" >
+													<a title="Logout" href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+												</li>
+											</ul>
+										</li>
+										@endif
+									@else
+										<li class="menu-item" ><a title="Register or Login" href="{{route('login')}}">Login</a></li>
+										<li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>	
+									@endif
+								@endif
 							</ul>
 						</div>
 					</div>
@@ -158,22 +194,22 @@
 						<div class="container">
 							<ul class="nav primary clone-main-menu" id="mercado_main" data-menuname="Main menu" >
 								<li class="menu-item home-icon">
-									<a href="index.html" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
+									<a href="/" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
 								</li>
 								<li class="menu-item">
-									<a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+									<a href="/aboutus" class="link-term mercado-item-title">About Us</a>
 								</li>
 								<li class="menu-item">
-									<a href="shop.html" class="link-term mercado-item-title">Shop</a>
+									<a href="/shop" class="link-term mercado-item-title">Shop</a>
 								</li>
 								<li class="menu-item">
-									<a href="cart.html" class="link-term mercado-item-title">Cart</a>
+									<a href="/cart" class="link-term mercado-item-title">Cart</a>
 								</li>
 								<li class="menu-item">
-									<a href="checkout.html" class="link-term mercado-item-title">Checkout</a>
+									<a href="/checkout" class="link-term mercado-item-title">Checkout</a>
 								</li>
 								<li class="menu-item">
-									<a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
+									<a href="/contactus" class="link-term mercado-item-title">Contact Us</a>
 								</li>																	
 							</ul>
 						</div>
