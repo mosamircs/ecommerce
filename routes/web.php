@@ -5,6 +5,7 @@ use App\Http\Livewire\Admin\AdminDashboard;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ContactusComponent;
+use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboard;
@@ -33,6 +34,8 @@ Route::get('/checkout', CheckoutComponent::class);
 Route::get('/aboutus', AboutusComponent::class);
 
 Route::get('/contactus', ContactusComponent::class);
+
+Route::get('/product/{slug}',DetailsComponent::class)->name("product.details");
 
 //for user 
 Route::middleware(['auth:sanctum','verified'])->group(function(){
